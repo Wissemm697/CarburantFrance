@@ -22,7 +22,7 @@ COLONNES = ["id", "code_postal", "ville", "departement", "latitude", "longitude"
 # Plage plausible par carburant (en €/L) : hors de cette plage, c'est une erreur de saisie
 # de la station (ex. un prix d'essence déclaré sur l'E85), le prix est ignoré.
 PRIX_BORNES = {
-    "Gazole": (1.0, 4.0), "SP95": (1.0, 4.0), "SP98": (1.0, 4.0), "E10": (1.0, 4.0),
+    "Gazole": (1.5, 4.0), "SP95": (1.5 , 4.0), "SP98": (1.5, 4.0), "E10": (1.5, 4.0),
     "E85": (0.4, 1.6), "GPLc": (0.4, 1.8),
 }
 NB_STATIONS_MIN = 1000          # en dessous, on suppose un fichier source cassé

@@ -2,6 +2,8 @@ name: Mise à jour des prix
 
 # Déclencheur : un bouton "Run workflow" dans l'onglet Actions de GitHub
 on:
+  schedule:
+    - cron: "0 5 * * *"
   workflow_dispatch:
 
 # Autorise la recette à écrire dans ton dépôt (nécessaire pour l'étape 6)
@@ -11,7 +13,7 @@ permissions:
 jobs:
   update:
     # 1. Prends un ordinateur neuf et vide (Linux)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       # 2. Mets dessus une copie de ton projet
       - uses: actions/checkout@v4

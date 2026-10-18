@@ -1,0 +1,37 @@
+name: Mise à jour des prix
+
+# Déclencheur : un bouton "Run workflow" dans l'onglet Actions de GitHub
+on:
+  workflow_dispatch:
+
+# Autorise la recette à écrire dans ton dépôt (nécessaire pour l'étape 6)
+permissions:
+  contents: write
+
+jobs:
+  update:
+    # 1. Prends un ordinateur neuf et vide (Linux)
+    runs-on: ubuntu-latest
+    steps:
+      # 2. Mets dessus une copie de ton projet
+      - uses: actions/checkout@v4
+
+      # 3. Installe Python
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # 4. Installe requests et pandas
+      - run: pip install -r requirements.txt
+
+      # 5. Lance ton script
+      - run: python scrapper.py
+
+      # 6. Renvoie les fichiers de data/ dans ton dépôt
+      - name: Enregistrer les nouvelles données
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git diff --staged --quiet || git commit -m "data: mise a jour $(date -u +%F)"
+          git push
